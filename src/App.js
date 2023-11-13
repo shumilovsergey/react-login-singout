@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import LoginSignup from './Components/LoginSignup/LoginSignup';
+import Gpt from './Components/Gpt/Gpt';
+
 
 
 
@@ -8,7 +10,7 @@ import LoginSignup from './Components/LoginSignup/LoginSignup';
 function App() {
   return (
     <div>
-      <LoginSignup/>
+      <Gpt/>
     </div>
   );
 }
