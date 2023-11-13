@@ -7,7 +7,32 @@ import password_icon from '../Assets/password.png'
 
 const LoginSignup = () => {
 
-    const [action, setAction]=useState("sign up");
+    const [action, setAction]=useState("sign up")
+    const [user, setUser]=useState("")
+    const [email, setEmail]=useState("")
+    const [passord, setPassword]=useState("")
+
+    const [userDirty, setUserDirty]=useState(false)
+    const [emailDirty, setEmailDirty]=useState(false)
+    const [passwordDirty, setPasswordDirty]=useState(false)
+    
+    const [userError, setUserError]=useState("Введите имя!")
+    const [emailError, setEmailError]=useState("Введите емэил!")
+    const [passwordError, setPasswordError]=useState("Введите пароль!")
+
+    const blurHandler = (e) => {
+        switch (e.target.name) {
+            case 'user':
+                setUserDirty(true)
+                break
+            case 'email':
+                setEmailDirty(true)
+                break
+            case 'password':
+                setPasswordDirty(true)
+                break
+        }
+    }
 
   return (
     <div className="container">
@@ -20,17 +45,20 @@ const LoginSignup = () => {
             {action==="login"?<div></div>:
             <div className="input">
             <img src={user_icon} alt="" className="" />
-            <input type="text" placeholder='name' className="" />
+            {(userDirty && userError) && <div className='validEror'>{userError}</div>}
+            <input onBlur={e => blurHandler(e)} name="user" type="text" placeholder='user' className="" />
         </div>}
 
             <div className="input">
                 <img src={email_icon} alt="" className="" />
-                <input type="email" placeholder='email' className="" />
+                {(emailDirty && emailError) && <div className='validEror'>{emailError}</div>}
+                <input onBlur={e => blurHandler(e)} name="email" type="email" placeholder='email' className="" />
             </div>
 
             <div className="input">
                 <img src={password_icon} alt="" className="" />
-                <input type="passord" placeholder='password' className="" />
+                {(passwordDirty && passwordError) && <div className='validEror'>{passwordError}</div>}
+                <input onBlur={e => blurHandler(e)} name="password" type="passord" placeholder='password' className="" />
             </div>
         </div>
 
