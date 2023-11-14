@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Gpt.css'
+
+import user_icon from '../Assets/person.png'
+import email_icon from '../Assets/email.png'
+import password_icon from '../Assets/password.png'
+import error_icon from '../Assets/error_3.png'
 
 const Gpt = () => {
     const [formData, setFormData] = useState({
@@ -7,37 +13,43 @@ const Gpt = () => {
       email: '',
       password: '',
     });
-  
+
+    const [action, setAction]=useState("sign up")
     const [errors, setErrors] = useState({});
   
     const handleChange = (e) => {
-      const { name, value } = e.target;
       setFormData({
         ...formData,
-        [name]: value,
+        [e.target.name]: e.target.value,
       });
     };
   
     const validateForm = () => {
       const errors = {};
+      const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+
   
-      // Validate username
-      if (formData.username.trim().length === 0) {
-        errors.username = 'Username is required';
+      // Validate form fields
+
+      // Validate email user
+      if (formData.user.length === 0) {
+        errors.user = 'введите имя';
+
       }
   
       // Validate email
-      if (!formData.email.includes('@')) {
-        errors.email = 'Invalid email address';
+      if (!re.test(String(formData.email).toLowerCase())) {
+        errors.email = 'плохой емеил';
       }
   
       // Validate password
-      if (formData.password.length < 6) {
-        errors.password = 'Password must be at least 6 characters long';
+      if (formData.password.length < 4) {
+        errors.password = 'короткий пароль';
       }
   
       setErrors(errors);
-      return Object.keys(errors).length === 0; // Return true if there are no errors
+      return Object.keys(errors).length === 0;
     };
   
     const handleSubmit = async (e) => {
@@ -56,27 +68,41 @@ const Gpt = () => {
     };
   
     return (
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" name="username" value={formData.username} onChange={handleChange} />
-          {errors.username && <div className="error">{errors.username}</div>}
-        </label>
-        <br />
-        <label>
-          Email:
-          <input type="email" name="email" value={formData.email} onChange={handleChange} />
-          {errors.email && <div className="error">{errors.email}</div>}
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" name="password" value={formData.password} onChange={handleChange} />
-          {errors.password && <div className="error">{errors.password}</div>}
-        </label>
-        <br />
-        <button type="submit">Sign Up</button>
-      </form>
+      <div className="container">
+        <div className="header">
+          <div className="text">{action}</div>
+          <div className="underline"></div>
+        </div>
+          
+        <form onSubmit={handleSubmit} className='inputs'>
+          <div className="input">
+            <img src={errors.user?error_icon:user_icon} alt="" className="" />
+            <input type="text" name="user" value={formData.user} placeholder= "имя пользователя" onChange={handleChange} />
+          </div>
+
+
+          <div className="input">
+            <img src={errors.email?error_icon:email_icon} alt="" className="" />
+            <input type="text" name="email" value={formData.email} placeholder= "адрес почты" onChange={handleChange} />
+          </div>
+
+
+          <div className="input">
+            <img src={errors.password?error_icon:password_icon} alt="" className="" />
+            <input type="password" name="password" value={formData.password} placeholder= "пароль" onChange={handleChange} />
+          </div>
+
+          <div className="forgot-password">
+            lost password?
+            <span> click here!</span>
+          </div>
+
+          <div className="submit-container">
+          <button className='submit' type="submit">sing up</button>
+          </div>
+          
+        </form>
+      </div>
     );
   };
   
