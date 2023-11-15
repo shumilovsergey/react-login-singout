@@ -1,4 +1,4 @@
-/* .container{
+.container{
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -29,16 +29,16 @@
     height: 6px;
     background: #9d0a00;
     border-radius: 9px;
-} */
+}
 
-/* .inputs{
+.inputs{
     margin-top: 55px;
     display: flex;
     flex-direction: column;
     gap: 25px;
-} */
+}
 
-/* .input{
+.input{
     display: flex;
     align-items: center;
     margin: auto;
@@ -46,6 +46,7 @@
     height: 80px;
     background: #eaeaea;
     border-radius: 6px;
+    box-shadow: 2px 2px 2px #676767;
 }
 
 .input img{
@@ -91,14 +92,17 @@
     font-weight: 700;
     cursor: pointer;
     border-radius: 50px;
+    box-shadow: 2px 2px 2px #676767;
+    
 }
 
-.gray{
+.submit:hover{
     background: #eaeaea;
     color: #676767;
+    box-shadow: 2px 2px 2px #9d0a00;
 }
 
 
 .validError{
     color: #9d0a00;
-} */
+}
