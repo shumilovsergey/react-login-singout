@@ -52,13 +52,24 @@ const Login = () => {
     
         if (validateForm()) {
           try {
-            const response = await axios.post('http://localhost:8080/login', formData);
-            console.log('Login successful:', response.data);
-            const allHeaders = response.headers;
-            console.log('All headers:', allHeaders);
-            const myCookie = response.headers.get('Authorization');
-            console.log('Specific cookie:', myCookie);
 
+            const customHeaders = {
+              'withCredentials': true,
+              'Access-Control-Allow-Credentials': true,
+              'Content-Type': 'application/json',
+              'Accept': '*/*',
+              'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+            };
+
+
+            const response = await axios.post('http://localhost:8080/login', formData, { headers: customHeaders });
+            console.log('Login successful:', response.data);
+
+            const cookie = response.headers['set-cookie']
+            console.log('cookie: ', cookie);
+
+
+            
           } catch (error) {
             console.error('Login failed:', error);
           }
