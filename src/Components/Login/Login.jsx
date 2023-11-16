@@ -53,20 +53,29 @@ const Login = () => {
         if (validateForm()) {
           try {
 
-            const customHeaders = {
-              'withCredentials': true,
-              'Access-Control-Allow-Credentials': true,
-              'Content-Type': 'application/json',
-              'Accept': '*/*',
-              'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-            };
+            // const response = await fetch('http://localhost:8080/login/', {
+            //   method: 'POST',
+            //   body: formData,
+            //   headers: {
+            //     'Content-Type': 'application/json',
+            //     'Host': 'localhost:8080'
+            //   }
+            // });
+            
+            // console.log("ok")
 
 
-            const response = await axios.post('http://localhost:8080/login', formData, { headers: customHeaders });
+            const response = await axios.post('http://localhost:8080/login', formData);
             console.log('Login successful:', response.data);
-
-            const cookie = response.headers['set-cookie']
-            console.log('cookie: ', cookie);
+              // .then(function (response) {
+              //   console.log(response.data);
+              //   console.log(response.status);
+              //   console.log(response.statusText);
+              //   console.log(response.headers);
+              //   console.log(response.config);
+              // });
+            // const cookie = response.config
+            // console.log('cookie: ', cookie);
 
 
             
