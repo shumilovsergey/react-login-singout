@@ -65,17 +65,10 @@ const Login = () => {
             // console.log("ok")
 
 
-            const response = await axios.post('http://localhost:8080/login', formData);
-            console.log('Login successful:', response.data);
-              // .then(function (response) {
-              //   console.log(response.data);
-              //   console.log(response.status);
-              //   console.log(response.statusText);
-              //   console.log(response.headers);
-              //   console.log(response.config);
-              // });
-            // const cookie = response.config
-            // console.log('cookie: ', cookie);
+            const response = await axios.post('http://localhost:8080/login', formData, { withCredentials: true });
+            console.log('Login successful:', response.data.message);
+            const token = response.data.Authorization;
+            console.log('JWT Token:', token);
 
 
             
